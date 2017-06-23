@@ -1,31 +1,22 @@
 import 'angular';
 import '@uirouter/angularjs';
 
-export const app = angular.module('app', ['ui.router']);
+import { configRoutes } from './app/config/routes';
 
-routesConfig.$inject = ['$stateProvider'];
+import { CustomersModule } from './app/customers/customers.module';
 
-function routesConfig($stateProvider: any) {
-    var helloState = {
-        name: 'main',
-        url: '/main',
-        template: '<h3>hello world!</h3>'
-    }
+export const app =
+    angular
+        .module('app', [
+            'ui.router',
+            CustomersModule.name
+        ]);
 
-    var aboutState = {
-        name: 'about',
-        url: '/about',
-        template: '<h3>Its the app!</h3>'
-    }
-
-    $stateProvider.state(helloState);
-    $stateProvider.state(aboutState);
-}
-
-app.config(routesConfig);
+app
+    .config(configRoutes);
 
 angular.element(document).ready(function() {
-    angular.bootstrap(document.body, [ app.name ], {
+    angular.bootstrap(document.body, [app.name], {
         strictDi: true
     });
 });

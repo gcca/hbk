@@ -10,7 +10,9 @@ html
             System.import('main.js').catch(function(err){console.error(err.message);});
         style.
             .active { color: blue; font-weight: bold; }
+            .menu a + a { margin-left: 8px; }
     body(ng-cloak)
-        a(ui-sref='main', ui-sref-active='active') Main
-        a(ui-sref='about', ui-sref-active='active') About
+        .menu
+            a(ui-sref='main', ui-sref-active='active') main
+            a(ui-sref='customers', ui-sref-active='active') customers
         ui-view
