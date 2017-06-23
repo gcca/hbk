@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "@uirouter/angularjs": "^1.0.4",
+    "angular": "^1.6.4",
+    "systemjs": "^0.20.14"
+  },
+  "devDependencies": {
+    "@types/angular": "^1.6.20",
+    "@types/angular-ui-router": "^1.1.37",
+    "concurrently": "^3.5.0",
+    "lite-server": "^2.3.0",
+    "pug-cli": "^1.0.0-alpha6",
+    "typescript": "^2.3.4"
+  },
+  "scripts": {
+    "compile": "concurrently \"npm run compile:pug\" \"npm run compile:typescript\"",
+    "compile:pug": "pug src/",
+    "compile:typescript": "tsc -p src/",
+    "serve": "lite-server -c=bs-config.json",
+    "start": "concurrently \"npm run watch\" \"npm run serve\"",
+    "watch": "concurrently \"npm run watch:pug\" \"npm run watch:typescript\"",
+    "watch:pug": "npm run compile:pug -- -P -w",
+    "watch:typescript": "npm run compile:typescript -- -w"
+  }
+}
