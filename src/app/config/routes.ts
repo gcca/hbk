@@ -1,18 +1,25 @@
-configRoutes.$inject = ['$stateProvider'];
+configRoutes.$inject = [ '$stateProvider' ];
 
 export function configRoutes($stateProvider: ng.ui.IStateProvider): void {
-    let helloState = {
+    let mainState = {
         name: 'main',
         url: '/main',
         template: '<h3>hello world!</h3>'
     };
 
-    let aboutState = {
+    let customersState = {
         name: 'customers',
         url: '/customers',
         template: '<customers></customers>'
     };
 
-    $stateProvider.state(helloState);
-    $stateProvider.state(aboutState);
+    let customerState = {
+        name: 'customer',
+        url: '/customer/:dni',
+        template: '<customer></customer>'
+    };
+
+    $stateProvider.state(mainState);
+    $stateProvider.state(customersState);
+    $stateProvider.state(customerState);
 }

@@ -1,0 +1,8 @@
+div(ng-if='customer')
+    div
+        label Nombre:
+        input(type="text", value="{{ customer.name }}")
+    div
+        label DNI:
+        input(type="text", value="{{ customer.dni }}")
+a(ui-sref='customers') Volver

@@ -1,27 +1,15 @@
-import { Customer } from './customer/customer';
-
-import { CustomersService } from './customers.service';
-
-CustomersController.$inject = ['customersService', '$scope'];
-
-function CustomersController(customersService: CustomersService,
-                             $scope: any) {
-    customersService.customers()
-        .then((customers: Customer[]) => {
-            $scope.$apply(() => {
-                $scope.customers = customers
-            });
-        });
-}
+import { CustomersComponentController } from './customers.component.controller';
 
 export const CustomersComponent: ng.IComponentOptions = {
+    controller: CustomersComponentController,
     template: `
     <h4>Clientes</h4>
     <ul>
         <li ng-repeat="customer in customers">
-            {{ customer.name }}
+            <a ui-sref="customer({ dni: customer.dni })">
+                {{ customer.name }}
+            </a>
         </li>
     </ul>
-    `,
-    controller: CustomersController
+    `
 };

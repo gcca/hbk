@@ -1,22 +1,16 @@
 import { Customer } from './customer/customer';
 
-const CUSTOMERS: Customer[] = [{
-    dni: '11111111',
-    name: 'Cliente N1',
-}, {
-    dni: '22222222',
-    name: 'Cliente N2'
-}, {
-    dni: '33333333',
-    name: 'Cliente N3'
-}];
+import { CUSTOMERS } from './customers.data';
 
 export class CustomersService {
-    customers() {
-        return {
-            then(callback: Function) {
-                setTimeout(() => callback(CUSTOMERS), 3000);
-            }
-        };
+
+    constructor(private $q: ng.IQService) { }
+
+    customers(): ng.IPromise<Customer[]> {
+        let deferred = this.$q.defer<Customer[]>();
+        setTimeout(() => deferred.resolve(CUSTOMERS), 800);
+        return deferred.promise;
     }
+
+    static $inject = [ '$q' ];
 }

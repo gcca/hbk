@@ -1,13 +1,8 @@
 import { Customer } from './customer';
 
-export const CustomerComponent: ng.IComponentOptions = {
-    template: '<p>Hello, {{ $ctrl.user.name }} !</p>',
-    controller: function() {
-        let customer: Customer = {
-            dni: '12345678',
-            name: 'Cliente N1'
-        };
+import { CustomerComponentController } from './customer.component.controller';
 
-        this.customer = customer;
-    }
+export const CustomerComponent: ng.IComponentOptions = {
+    controller: CustomerComponentController,
+    templateUrl: 'app/customers/customer/customer.html'
 };
