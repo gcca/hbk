@@ -8,7 +8,7 @@ export class CustomersService {
 
     customers(): ng.IPromise<Customer[]> {
         let deferred = this.$q.defer<Customer[]>();
-        setTimeout(() => deferred.resolve(CUSTOMERS), 800);
+        setTimeout(() => deferred.resolve(CUSTOMERS), 700);
         return deferred.promise;
     }
 
