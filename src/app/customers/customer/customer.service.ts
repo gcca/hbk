@@ -8,7 +8,7 @@ export class CustomerService {
 
     customer(dni: string): ng.IPromise<Customer> {
         let deferred = this.$q.defer<Customer>();
-        let customer = CUSTOMERS.filter(customer => dni == customer.dni)[0];
+        let customer = CUSTOMERS.filter(customer => dni === customer.dni)[0];
         this.$timeout(() => deferred.resolve(customer), 700);
         return deferred.promise;
     }

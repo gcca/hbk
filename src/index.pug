@@ -4,6 +4,8 @@ html
         title Demo
         base(href='/')
         meta(charset='UTF-8')
+        script(src='node_modules/angular/angular.js')
+        script(src='node_modules/@uirouter/angularjs/release/angular-ui-router.js')
         script(src='node_modules/systemjs/dist/system.src.js')
         script(src='systemjs.config.js')
         script.
@@ -12,7 +14,4 @@ html
             .active { color: blue; font-weight: bold; }
             .menu a + a { margin-left: 8px; }
     body(ng-cloak)
-        .menu
-            a(ui-sref='main', ui-sref-active='active') main
-            a(ui-sref='customers', ui-sref-active='active') customers
-        ui-view
+        app

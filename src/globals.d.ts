@@ -1,5 +1,7 @@
+import * as _angular_ from 'angular';
+
 declare global {
-    const angular: ng.IAngularStatic;
+    const angular: typeof _angular_;
 }
 
-export {};
+export { };

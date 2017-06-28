@@ -22,7 +22,15 @@ var allSpecFiles = Object.keys(window.__karma__.files)
     .filter(isBuiltFile);
 
 System.config({
-    baseURL: 'base/src'
+    baseURL: 'base/src',
+    map: {
+        testing: 'testing'
+    },
+    packages: {
+        testing: {
+            defaultExtension: 'js'
+        }
+    }
 });
 
 System.import('systemjs.config.js').then(initTesting);
