@@ -1,0 +1,10 @@
+div(ng-init='')
+    div
+        label DNI del cliente
+        select(name='customerDni', ng-model='data.customerDni')
+            option(ng-repeat='customer in customers') {{ customer.dni }}
+    div
+        label Monto
+        input(name='amount', ng-model='data.amount')
+    div
+        button(ng-click='$ctrl.pay()') Pagar

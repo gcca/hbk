@@ -1,13 +1,13 @@
 import { CustomersComponent } from './customers.component';
 import { CustomersComponentController, CustomersScope }
     from './customers.component.controller';
-import { CustomersService } from './customers.service';
+import { CustomerService } from './customer.service';
 
-import { Customer } from './customer/customer';
+import { Customer } from './customer';
 
 import { UtilsService } from '../../testing/utils';
 
-angular.module('test.customers', [])
+angular.module('test.customer', [])
     .component('customers', CustomersComponent)
     .service('utils', UtilsService);
 
@@ -16,10 +16,11 @@ describe('CustomersComponent', () => {
         let customersComponentController: CustomersComponentController,
             $scope: ng.IScope;
 
-        beforeEach(angular.mock.module('test.customers'));
+        beforeEach(angular.mock.module(
+            'test.customer', ($provide: ng.auto.IProvideService) => {
 
-        beforeEach(angular.mock.module(($provide: ng.auto.IProvideService) => {
-            $provide.value('customersService', {
+            // TODO: improve type checking on {mock,stub}ing services
+            $provide.value('customerService', {
                 customers() {
                     return {
                         then: (cb: any) => cb([{
@@ -45,6 +46,12 @@ describe('CustomersComponent', () => {
                 $componentController<CustomersComponentController, {}>(
                     'customers', { $scope }, {});
         }));
+
+        it('should start with a customer collection', () => {
+            // TODO: this must be test when `customerService` is a dummy
+            expect($scope.customers).not.toBeNull();
+            expect($scope.customers.length).toBeDefined();
+        });
 
         it('should have two customers', () => {
             expect($scope.customers.length).toBe(2);

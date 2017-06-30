@@ -17,19 +17,22 @@
     "karma-jasmine": "^1.1.0",
     "karma-phantomjs-launcher": "^1.0.4",
     "lite-server": "^2.3.0",
+    "node-sass": "^4.5.3",
     "phantomjs-prebuilt": "^2.1.14",
     "pug-cli": "^1.0.0-alpha6",
     "typescript": "^2.3.4"
   },
   "scripts": {
-    "compile": "concurrently \"npm run compile:pug\" \"npm run compile:typescript\"",
+    "compile": "concurrently \"npm run compile:pug\" \"npm run compile:typescript\" \"npm run compile:sass\"",
     "compile:pug": "pug src/",
+    "compile:sass": "node-sass -r src/ -o src/",
     "compile:typescript": "tsc -p src/",
     "serve": "lite-server -c=bs-config.json",
     "start": "concurrently \"npm run watch\" \"npm run serve\"",
     "test": "karma start",
-    "watch": "concurrently \"npm run watch:pug\" \"npm run watch:typescript\"",
+    "watch": "concurrently \"npm run watch:pug\" \"npm run watch:typescript\" \"npm run watch:sass\"",
     "watch:pug": "npm run compile:pug -- -P -w",
+    "watch:sass": "npm run compile:sass && npm run compile:sass -- -w",
     "watch:typescript": "npm run compile:typescript -- -w"
   }
 }

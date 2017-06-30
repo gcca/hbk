@@ -1,9 +1,9 @@
-(function (global) {
+(function() {
     System.config({
         map: {
             app: 'app',
             '@uirouter/angularjs': 'npm:@uirouter/angularjs/release/angular-ui-router.js',
-            'angular': 'npm:angular/angular.js'
+            'angular': 'npm:angular/index.js'
         },
         meta: {
             '@uirouter/angularjs': {
@@ -24,4 +24,4 @@
             'npm:': 'node_modules/'
         }
     });
-})(this);
+})();

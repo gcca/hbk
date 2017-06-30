@@ -1,4 +1,4 @@
-import { Customer } from './customer/customer';
+import { Customer } from './customer';
 
 export const CUSTOMERS: Customer[] = [{
     dni: '11111111',

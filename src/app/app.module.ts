@@ -1,10 +1,15 @@
 import { AppComponent } from './app.component';
+import { AppRoutes } from './app.routes';
 
-import { CustomersModule } from './customers/customers.module';
+import { CustomerModule } from './customer/customer.module';
+import { PaymentModule } from './payment/payment.module';
 
 export const AppModule = angular.module('app', [
     'ui.router',
-    CustomersModule.name
+    CustomerModule.name,
+    PaymentModule.name
 ]);
 
-AppModule.component('app', AppComponent);
+AppModule
+    .config(AppRoutes)
+    .component('app', AppComponent);

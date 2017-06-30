@@ -1,0 +1,11 @@
+style
+    include customers.css
+
+h4 Clientes
+    a(ui-sref='/customer/create') &nbsp;[+]
+ul
+    li(ng-repeat="customer in customers")
+        .options
+            .option(ng-click="$ctrl.remove(customer)") [-]
+        a(ui-sref="customer({ dni: customer.dni })")
+            | {{ customer.name }}

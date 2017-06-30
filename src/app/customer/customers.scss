@@ -1,0 +1,11 @@
+customers {
+    .options {
+        display: inline;
+
+        .option {
+            cursor: pointer;
+            display: inline;
+            margin-right: 8px;
+        }
+    }
+}
