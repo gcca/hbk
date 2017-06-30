@@ -1,38 +1,39 @@
 import { Customer } from './customer';
 
-import { CUSTOMERS } from './customers.data';
-
 export class CustomerService {
-    constructor(private $q: ng.IQService,
-                private $timeout: ng.ITimeoutService) { }
+    constructor(private $http: ng.IHttpService,
+                private $q: ng.IQService) { }
 
     customers(): ng.IPromise<Customer[]> {
         let deferred = this.$q.defer<Customer[]>();
-        this.$timeout(() => deferred.resolve(CUSTOMERS.map(it => it)), 700);
+        this.$http.get<Customer[]>('http://localhost:8000/customer')
+            .then(http => {
+                deferred.resolve(http.data);
+            })
+            .catch(() => {
+                // ...
+            });
         return deferred.promise;
     }
 
     customer(dni: string): ng.IPromise<Customer> {
         let deferred = this.$q.defer<Customer>();
-        let customer = CUSTOMERS.filter(customer => dni === customer.dni)[0];
-        this.$timeout(() => deferred.resolve(customer), 700);
+        this.$http.get<Customer>(`http://localhost:8000/customer/${dni}`)
+            .then(http => {
+                deferred.resolve(http.data);
+            });
         return deferred.promise;
     }
 
     delete(customer: Customer): ng.IPromise<void> {
         let deferred = this.$q.defer<void>();
-        this.$timeout(() => {
-            let result = CUSTOMERS.find(other => other.dni === customer.dni);
-            if (result) {
-                CUSTOMERS.splice(CUSTOMERS.indexOf(result), 1);
+        this.$http
+            .delete<void>(`http://localhost:8000/customer/${customer.dni}`)
+            .then(http => {
                 deferred.resolve();
-            } else {
-                deferred.reject(
-                    new Error(`ERROR: customer not found: ${customer}`));
-            }
-        });
+            });
         return deferred.promise;
     }
 
-    static $inject = [ '$q', '$timeout' ];
+    static $inject = [ '$http', '$q' ];
 }

@@ -11,6 +11,7 @@
     "@types/jasmine": "^2.5.53",
     "angular-mocks": "^1.6.4",
     "babel-polyfill": "^6.23.0",
+    "body-parser": "^1.17.2",
     "concurrently": "^3.5.0",
     "express": "^4.15.3",
     "express-cors": "0.0.3",

@@ -1,7 +1,7 @@
 export const mainState = {
     name: 'main',
     url: '/main',
-    template: '<h3>hello world!</h3>'
+    template: '<h3>AppMain</h3>'
 };
 
 export const customersState = {
