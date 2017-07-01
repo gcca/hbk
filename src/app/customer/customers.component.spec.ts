@@ -36,7 +36,6 @@ describe('CustomersComponent', () => {
         }));
 
         beforeEach(inject(($componentController: ComponentController,
-                           $rootScope: ng.IRootScopeService,
                            utils: UtilsService) => {
             $scope = utils.$newScope<CustomersScope>({
                 customers: []
@@ -55,6 +54,13 @@ describe('CustomersComponent', () => {
 
         it('should have two customers', () => {
             expect($scope.customers.length).toBe(2);
+        });
+
+        it('should remove a customer by dni', done => {
+            let customer = $scope.customers[1];
+            customersComponentController.remove(customer);
+            expect($scope.customers.length).toBe(1);
+            done();
         });
     });
 });

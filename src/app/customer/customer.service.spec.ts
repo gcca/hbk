@@ -1,24 +1,28 @@
 import { CustomerService } from './customer.service';
 
-angular.module('test.customers.customer', [])
+angular.module('test.customer', [])
     .service('customerService', CustomerService);
 
 describe('CustomerService', () => {
     let customerService: CustomerService,
-        $rootScope: ng.IRootScopeService,
-        $timeout: ng.ITimeoutService;
+        $httpBackend: ng.IHttpBackendService,
+        $rootScope: ng.IRootScopeService;
 
-    beforeEach(angular.mock.module('test.customers.customer'));
+    beforeEach(angular.mock.module('test.customer'));
 
     beforeEach(inject((_customerService_: CustomerService,
-                       _$rootScope_: ng.IRootScopeService,
-                       _$timeout_: ng.ITimeoutService) => {
+                       _$httpBackend_: ng.IHttpBackendService,
+                       _$rootScope_: ng.IRootScopeService) => {
         customerService = _customerService_;
+        $httpBackend = _$httpBackend_;
         $rootScope = _$rootScope_;
-        $timeout = _$timeout_;
     }));
 
     it('find a customer by DNI', done => {
+        $httpBackend.expectGET(/.*\/customer\/11111111/).respond({
+            dni: '11111111',
+            name: 'Cliente'
+        });
         customerService.customer('11111111').then(customer => {
             expect(customer.dni).not.toBeNull();
             expect(customer.name).not.toBeNull();
@@ -27,6 +31,6 @@ describe('CustomerService', () => {
             console.info('ERROR');
             done();
         });
-        $timeout.flush();
+        $httpBackend.flush();
     });
 });
